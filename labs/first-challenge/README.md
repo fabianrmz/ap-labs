@@ -12,21 +12,24 @@ This is the first challenge in your Advanced Programming Class.
 Build Requirements
 ------------------
 ```
-# Build Requirements here
+
+# Makefile GNU Make 4.2.1  run -> $ sudo apt install make
+# python =< 3
 ```
 
 
 How to build
 ------------
 ```
-# instructions here
+# run the command $ make build
+
 ```
 
 
 How to Run
 ----------
 ```
-# instructions here
+# to fully run the python script -> $ make runScript
 ```
 
 

@@ -1,5 +1,5 @@
+build:
+	sudo apt install python=<3.8
 
-include ../../common.mk
-
-foo: firstChallenge.py
-	py firstChallenge.py > foo
+runScript:
+	python3 firstChallenge.py
