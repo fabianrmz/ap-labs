@@ -7,7 +7,8 @@ def setCycle(element,n):
     elif (isinstance(element,list)):
         for x in element:  
             n=int(setCycle(x,n))
-    return int(n);
+    return int(n)
+
 
 getLength([1, [2, 3]])
 getLength([1, [2, [3, 4]]])

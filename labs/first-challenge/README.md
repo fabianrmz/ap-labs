@@ -14,7 +14,7 @@ Build Requirements
 ```
 
 # Makefile GNU Make 4.2.1  run -> $ sudo apt install make
-# python =< 3
+# python3 >= 3.8
 ```
 
 
