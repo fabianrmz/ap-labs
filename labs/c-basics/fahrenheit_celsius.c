@@ -9,16 +9,39 @@
 
 int main(int argc, char *argv[])
 {
-    int fahr;
-    for (fahr = LOWER; fahr <= UPPER; fahr = fahr + STEP){
-        printf("Fahrenheit: %3d, Celcius: %6.1f\n", fahr, (5.0/9.0)*(fahr-32));
+
+    
+    
+    
+    int count = 0; 
+    while(argv[++count] != NULL);
+    
+    if(count==2){
+       
+        char *a = argv[1];
+        int num = atoi(a);
+        int celcius = (5.0/9.0)*(num-32);
+        printf("Fahrenheit: %d, Celcius: %6.1f\n", num, (double)celcius);
+    }else if(count==4){
+       
+        
+        char *start1 = argv[1];
+        int start = atoi(start1);
+
+        char *end1 = argv[2];
+        int end = atoi(end1);
+
+        char *increment1 = argv[3];
+        int increment = atoi(increment1);
+
+        int fahr;
+        for (fahr = start; fahr <= end; fahr = fahr + increment){
+            printf("Fahrenheit: %3d, Celcius: %6.1f\n", fahr, (5.0/9.0)*(fahr-32));
+        }
     }
     
-    printf("-----------------------------\nInput:\n");
-    char *a = argv[1];
-    int num = atoi(a);
-    int celcius = (5.0/9.0)*(num-32);
-    printf("Fahrenheit: %d, Celcius: %6.1f\n", num, (double)celcius);
+    
+
     
     return 0;
 }
