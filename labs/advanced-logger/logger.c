@@ -118,7 +118,7 @@ int errorf(const char *format, ...)
         printf("%s", "ERROR:");
     }
     //set color font method [red error color]
-    setSpecificColor(35, 48);
+    setSpecificColor(31, 48);
     va_start(args, format);
     if (sysLog)
     {
@@ -141,7 +141,7 @@ int panicf(const char *format, ...)
 {
     
     //set color font method [red error color]
-    setSpecificColor(30, 41);
+    setSpecificColor(30, 45);
     va_list args;
     va_start(args, format);
     
@@ -157,7 +157,7 @@ int panicf(const char *format, ...)
         printf("%s", "PANIC:");
     }
     //set color font method
-    setSpecificColor(30, 48);
+    setSpecificColor(35, 48);
     if (sysLog)
     {
         openlog("logger", LOG_PID | LOG_CONS, LOG_SYSLOG);
@@ -173,7 +173,5 @@ int panicf(const char *format, ...)
     
     //set default color and background
     setSpecificColorDefault();
-    
-    
     return 3;
 }
