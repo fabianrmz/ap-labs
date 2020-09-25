@@ -1,3 +1,4 @@
+
 // Logger
 
 int initLogger(char *logType);
