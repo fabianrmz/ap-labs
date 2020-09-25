@@ -24,6 +24,7 @@ int main(int argc, char **argv)
         infof("INFO Message %d", 1);
         warnf("WARN Message %d", 2);
         errorf("ERROR Message %d", 2);
+        panicf(" %s\n", "WE ARE DOOMED!");
         break;
     case 3:
         // syslog logging
@@ -31,6 +32,7 @@ int main(int argc, char **argv)
         infof("INFO Message %d", 1);
         warnf("WARN Message %d", 2);
         errorf("ERROR Message %d", 2);
+        
         break;
     default:
         errorf("Invalid test case");
