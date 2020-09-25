@@ -173,5 +173,7 @@ int panicf(const char *format, ...)
     
     //set default color and background
     setSpecificColorDefault();
+    
+    
     return 3;
 }
