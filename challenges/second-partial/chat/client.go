@@ -7,6 +7,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net"
@@ -15,7 +16,29 @@ import (
 
 //!+
 func main() {
-	conn, err := net.Dial("tcp", "localhost:8000")
+
+	argsWithoutProg := os.Args[1:]
+	var username string
+	var serverPort string
+	if len(argsWithoutProg) != 4 {
+		fmt.Println("Failed, misisng parameters")
+		fmt.Println("Usage: ➜ go run client.go -user <user-name> -server <localhost:9000> ")
+		os.Exit(1)
+	} else if argsWithoutProg[0] == "-user" && argsWithoutProg[2] == "-server" {
+		username = argsWithoutProg[1]
+		serverPort = argsWithoutProg[3]
+	} else if argsWithoutProg[2] == "-user" && argsWithoutProg[0] == "-server" {
+		username = argsWithoutProg[3]
+		serverPort = argsWithoutProg[1]
+	} else {
+		fmt.Println("Failed, error in format parameters")
+		fmt.Println("Usage: ➜ go run client.go -user <user-name> -server <localhost:9000> ")
+		os.Exit(1)
+	}
+
+	fmt.Println("--Jumping into the ", serverPort, "server with username: ", username)
+
+	conn, err := net.Dial("tcp", serverPort)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -24,7 +47,9 @@ func main() {
 		io.Copy(os.Stdout, conn) // NOTE: ignoring errors
 		log.Println("done")
 		done <- struct{}{} // signal the main goroutine
+		return
 	}()
+	io.WriteString(conn, username)
 	mustCopy(conn, os.Stdin)
 	conn.Close()
 	<-done // wait for background goroutine to finish
