@@ -2,21 +2,38 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main() {
-	var maxStages, transitTime int
+	var maxStages int
+	maxStages = 100000
+	start := time.Now()
+	in, out := pipeline(maxStages)
+
+	for i := 0; i < 200; i++ {
+		in <- 1
+		<-out
+	}
+	close(in)
 
 	fmt.Println("Maximum number of pipeline stages   : ", maxStages)
-	fmt.Println("Time to transit trough the pipeline : ", transitTime)
+	fmt.Println("Time to transit trough the pipeline : ", float64(10000)/float64(time.Since(start)), "seconds")
 
-	var x, y int
-	go func() {
-		x = 1
-		fmt.Print("y:", y, " ")
-	}()
-	go func() {
-		y = 1
-		fmt.Print("x:", x, " ")
-	}()
+}
+
+func pipeline(stages int) (in chan int, out chan int) {
+	out = make(chan int)
+	first := out
+	for i := 0; i < stages; i++ {
+		in = out
+		out = make(chan int)
+		go func(in chan int, out chan int) {
+			for v := range in {
+				out <- v
+			}
+			close(out)
+		}(in, out)
+	}
+	return first, out
 }
